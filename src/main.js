@@ -31,6 +31,7 @@ function main() {
   		donutMode = !donutMode;
 	});
 	let dCheck=false;
+	let dCheck2=false;
 
 	{
 
@@ -761,6 +762,7 @@ function render(time) {
             if (obj === carGroup) {
                 if(donutMode) {
                     dCheck = true;
+					dCheck2 = true;
                     const radius = 60;
                     const revolutionSpeed = 0.2;
                     obj.rotation.y = rot * revolutionSpeed;
@@ -771,52 +773,81 @@ function render(time) {
                     );
                 } else {
                     if(dCheck){
-                        obj.position.set(-38, 2.31, 150);
+                        obj.position.set(120, 2.31, 150);
                         obj.rotation.y = 0; 
-                        dCheck = false;
-                    }
-                    const speed = 1;
-                    const roadLength = 360; 
-                    const initialPosition = 160; 
-                    obj.position.z -= speed;
-                    if (obj.position.z <= -roadLength / 2) {
-                        obj.position.z = initialPosition;
-                    }
+						dCheck2 = false;
+                    } 
+					else{
+						const speed = 1;
+                    	const roadLength = 360; 
+                    	const initialPosition = 160; 
+                    	obj.position.z -= speed;
+                    	if (obj.position.z <= -roadLength / 2) {
+                        	obj.position.z = initialPosition;
+                    	}
+					}
+                    
                 }
             } else if (obj === newCarGroup) {
-                const speed = 1;
-                const roadLength = 360; 
-                const initialPosition = 160; 
-                obj.position.z -= speed;
-                if (obj.position.z <= -roadLength / 2) {
-                    obj.position.z = initialPosition;
-                }
+				if(dCheck2){
+					obj.position.z = -100;
+
+				}
+				else{
+					const speed = 1;
+                	const roadLength = 360; 
+                	const initialPosition = 160; 
+                	obj.position.z -= speed;
+                	if (obj.position.z <= -roadLength / 2) {
+                    	obj.position.z = initialPosition;
+                	}
+				}
             } else if (obj === oppositeCar1 || obj === oppositeCar2) {
-                const speed = 1;
-                const roadLength = 360;
-                const initialPosition = -160;
-                obj.position.z += speed; // Move the car in the opposite direction
-                if (obj.position.z >= roadLength / 2) {
-                    obj.position.z = initialPosition;
-                }
+				if(dCheck2){
+					obj.position.z = 100;
+
+				}
+				else{
+					const speed = 1;
+                	const roadLength = 360;
+                	const initialPosition = -160;
+                	obj.position.z += speed; // Move the car in the opposite direction
+                	if (obj.position.z >= roadLength / 2) {
+                    	obj.position.z = initialPosition;
+                	}
+				}
             } else if (obj === xCar1 || obj === xCar2) {
-                const speed = 1;
-                const roadLength = 360;
-				const initialPosition = -160;
+				if(dCheck2){
+					obj.position.x = -80;
 
-                obj.position.x += speed; // Move the car in the positive x-direction
-                if (obj.position.x >= roadLength / 2) {
-                    obj.position.x = initialPosition;
-                }
+				}
+				else{
+					const speed = 1;
+					const roadLength = 360;
+					const initialPosition = -160;
+	
+					obj.position.x += speed; // Move the car in the positive x-direction
+					if (obj.position.x >= roadLength / 2) {
+						obj.position.x = initialPosition;
+					}
+				}
+                
             } else if (obj === xCar3 || obj === xCar4) {
-                const speed = 1;
-                const roadLength = 360;
-				const initialPosition = 160;
+				if(dCheck2){
+					obj.position.x = 80;
 
-                obj.position.x -= speed; // Move the car in the negative x-direction
-                if (obj.position.x <= -roadLength / 2) {
-                    obj.position.x = initialPosition;
-                }
+				}
+				else{
+					const speed = 1;
+                	const roadLength = 360;
+					const initialPosition = 160;
+
+                	obj.position.x -= speed; // Move the car in the negative x-direction
+                	if (obj.position.x <= -roadLength / 2) {
+                    	obj.position.x = initialPosition;
+                	}
+				}
+                
             } else {
                 obj.rotation.x = rot / 2;
                 obj.rotation.y = rot / 2;
