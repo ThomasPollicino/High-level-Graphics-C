@@ -548,6 +548,21 @@ let xCar4;
 		const roadLine11 = makeInstance(roadLineGeometry, 0, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
 		const roadLine12 = makeInstance(roadLineGeometry, -20, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
 
+		const roadLine77 = makeInstance(roadLineGeometry, 100, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine88 = makeInstance(roadLineGeometry, 120, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine99 = makeInstance(roadLineGeometry, 140, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine100 = makeInstance(roadLineGeometry, -100, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine111 = makeInstance(roadLineGeometry, -120, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine122 = makeInstance(roadLineGeometry, -140, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+
+		const roadLine777 = makeInstance(roadLineGeometry, 100, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine888 = makeInstance(roadLineGeometry, 120, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine999 = makeInstance(roadLineGeometry, 140, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine1000 = makeInstance(roadLineGeometry, -100, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine1111 = makeInstance(roadLineGeometry, -120, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine1222 = makeInstance(roadLineGeometry, -140, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+
+
 
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -756,8 +771,8 @@ function render(time) {
     objects.forEach((obj, ndx) => {
         const speed = 1 + ndx * 0.1;
         const rot = time * speed;
-        if (obj.geometry instanceof THREE.ConeGeometry) {
-            obj.rotation.y = rot;
+        if (obj.geometry instanceof THREE.ConeGeometry || obj.geometry instanceof THREE.SphereGeometry) {
+            obj.rotation.y = rot/2;
         } else if (obj.type === 'Group') {
             if (obj === carGroup) {
                 if(donutMode) {
