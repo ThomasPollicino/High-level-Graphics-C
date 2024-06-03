@@ -11,7 +11,7 @@ function main() {
 
 	const fov = 45;
 	const aspect = 2; 
-	const near = 0.1;
+	const near = 1;
 	const far = 1000;
 	const camera = new THREE.PerspectiveCamera( fov, aspect, near, far );
 	camera.position.set( 0, 10, 20 );
@@ -226,14 +226,14 @@ function main() {
 
 		const roadWidth = 35;
 		const roadHeight = 0.15;
-		const roadDepth = 180;
+		const roadDepth = 360;
 		const roadGeometry = new THREE.BoxGeometry(roadWidth, roadHeight, roadDepth);
 		const roadColor = 0x444444;
 	
-		const road1 = makeInstance(roadGeometry, 50, 0.2, 0, 1, 1, 1, 0, 0, 0, null, roadColor);
-		const road4 = makeInstance(roadGeometry, -50, 0.2, 0, 1, 1, 1, 0, 0, 0, null, roadColor);
-		const road2 = makeInstance(roadGeometry, 0, 0.15, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadColor);
-		const road3 = makeInstance(roadGeometry, 0, 0.15, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadColor);
+		const road1 = makeInstance(roadGeometry, 50, 0.35, 0, 1, 1, 1, 0, 0, 0, null, roadColor);
+		const road4 = makeInstance(roadGeometry, -50, 0.35, 0, 1, 1, 1, 0, 0, 0, null, roadColor);
+		const road2 = makeInstance(roadGeometry, 0, 0.3, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadColor);
+		const road3 = makeInstance(roadGeometry, 0, 0.3, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadColor);
 
 		const roadLineWidth = 0.5;
 		const roadLineHeight = 0.1;
@@ -241,19 +241,33 @@ function main() {
 		const roadLineGeometry = new THREE.BoxGeometry(roadLineWidth, roadLineHeight, roadLineDepth);
 		const roadLineColor = 0xFFFF00; 
 
-		const roadLine1 = makeInstance(roadLineGeometry, 50, 0.25, 20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
-		const roadLine2 = makeInstance(roadLineGeometry, 50, 0.25, 0, 1, 1, 1, 0, 0, 0, null, roadLineColor);
-		const roadLine3 = makeInstance(roadLineGeometry, 50, 0.25, -20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
-		const roadLine4 = makeInstance(roadLineGeometry, -50, 0.25, 20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
-		const roadLine5 = makeInstance(roadLineGeometry, -50, 0.25, 0, 1, 1, 1, 0, 0, 0, null, roadLineColor);
-		const roadLine6 = makeInstance(roadLineGeometry, -50, 0.25, -20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine1 = makeInstance(roadLineGeometry, 50, 0.4, 20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine2 = makeInstance(roadLineGeometry, 50, 0.4, 0, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine3 = makeInstance(roadLineGeometry, 50, 0.4, -20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine4 = makeInstance(roadLineGeometry, -50, 0.4, 20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine5 = makeInstance(roadLineGeometry, -50, 0.4, 0, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine6 = makeInstance(roadLineGeometry, -50, 0.4, -20, 1, 1, 1, 0, 0, 0, null, roadLineColor);
 
-		const roadLine7 = makeInstance(roadLineGeometry, 20, 0.2, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
-		const roadLine8 = makeInstance(roadLineGeometry, 0, 0.2, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
-		const roadLine9 = makeInstance(roadLineGeometry, -20, 0.2, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
-		const roadLine10 = makeInstance(roadLineGeometry, 20, 0.2, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
-		const roadLine11 = makeInstance(roadLineGeometry, 0, 0.2, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
-		const roadLine12 = makeInstance(roadLineGeometry, -20, 0.2, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine01 = makeInstance(roadLineGeometry, 50, 0.4, 100, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine02 = makeInstance(roadLineGeometry, 50, 0.4, 120, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine03 = makeInstance(roadLineGeometry, 50, 0.4, 140, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine04 = makeInstance(roadLineGeometry, -50, 0.4, -100, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine05 = makeInstance(roadLineGeometry, -50, 0.4, -120, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine06 = makeInstance(roadLineGeometry, -50, 0.4, -140, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+
+		const roadLine001 = makeInstance(roadLineGeometry, -50, 0.4, 100, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine002 = makeInstance(roadLineGeometry, -50, 0.4, 120, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine003 = makeInstance(roadLineGeometry, -50, 0.4, 140, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine004 = makeInstance(roadLineGeometry, 50, 0.4, -100, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine005 = makeInstance(roadLineGeometry, 50, 0.4, -120, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+		const roadLine006 = makeInstance(roadLineGeometry, 50, 0.4, -140, 1, 1, 1, 0, 0, 0, null, roadLineColor);
+
+		const roadLine7 = makeInstance(roadLineGeometry, 20, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine8 = makeInstance(roadLineGeometry, 0, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine9 = makeInstance(roadLineGeometry, -20, 0.35, 60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine10 = makeInstance(roadLineGeometry, 20, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine11 = makeInstance(roadLineGeometry, 0, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
+		const roadLine12 = makeInstance(roadLineGeometry, -20, 0.35, -60, 1, 1, 1, 0, Math.PI / 2, 0, null, roadLineColor);
 
 
 
@@ -261,9 +275,9 @@ function main() {
 
 
 	
-		const greenSquareWidth = 180;
-		const greenSquareHeight = 0.1;
-		const greenSquareDepth = 180;
+		const greenSquareWidth = 360;
+		const greenSquareHeight = 0.2;
+		const greenSquareDepth = 360;
 		const greenSquareGeometry = new THREE.BoxGeometry(greenSquareWidth, greenSquareHeight, greenSquareDepth);
 		const greenSquareColor = 0x006600; 
 	
@@ -297,19 +311,19 @@ function main() {
 			objects.push(leaves);
 		  }
 	  
-		createTree1(83, 0.1, 20);
-		createTree(83, 0.1, -20);
-		createTree1(83, 0.1, -32);
-		createTree(83, 0.1, 32);
-		createTree(83, 0.1, 6);
-		createTree1(83, 0.1, -6);
+		createTree1(83, 0.11, 20);
+		createTree(83, 0.11, -20);
+		createTree1(83, 0.11, -32);
+		createTree(83, 0.11, 32);
+		createTree(83, 0.11, 6);
+		createTree1(83, 0.11, -6);
 
-		createTree1(-83, 0.1, 20);
-		createTree(-83, 0.1, -20);
-		createTree1(-83, 0.1, -32);
-		createTree(-83, 0.1, 32);
-		createTree(-83, 0.1, 6);
-		createTree1(-83, 0.1, -6);
+		createTree1(-83, 0.11, 20);
+		createTree(-83, 0.11, -20);
+		createTree1(-83, 0.11, -32);
+		createTree(-83, 0.11, 32);
+		createTree(-83, 0.11, 6);
+		createTree1(-83, 0.11, -6);
 	}
 
 	
