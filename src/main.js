@@ -3,6 +3,7 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
 import { OBJLoader } from 'three/addons/loaders/OBJLoader.js';
 import {MTLLoader} from 'three/addons/loaders/MTLLoader.js';
 
+
 let objects; 
 function main() {
 
@@ -22,6 +23,14 @@ function main() {
 
 	const scene = new THREE.Scene();
 	scene.background = new THREE.Color( 'lightBlue' );
+
+	const donutModeButton = document.getElementById('donutModeButton');
+	let donutMode = false;
+
+	donutModeButton.addEventListener('click', () => {
+  		donutMode = !donutMode;
+	});
+	let dCheck=false;
 
 	{
 
@@ -133,27 +142,53 @@ function main() {
 
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+	
 
-	{
-		const mtlLoader = new MTLLoader();
-		const objLoader = new OBJLoader();
-		mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
-			mtl.preload();
-			objLoader.setMaterials(mtl);
-			objLoader.load('lib/Avent_sport.obj', (root) => {//Credit: https://free3d.com/3d-model/lamborghini-aventador-sport-44634.html
-				const scaleFactor = 5.0;
-				root.scale.set(scaleFactor, scaleFactor, scaleFactor);
-	
-				const carGroup = new THREE.Group();//AI taught me how to use groups
-				carGroup.add(root);
-	
-				carGroup.position.set(45, 2.31, 57);
-	
-				scene.add(carGroup);
-				objects.push(carGroup); 
-			});
-		});
-	}
+	  let carGroup;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {//Credit: https://free3d.com/3d-model/lamborghini-aventador-sport-44634.html
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = -Math.PI / 2;
+
+      carGroup = new THREE.Group();
+      carGroup.add(root);
+
+      carGroup.position.set(-38, 2.31, 150);
+
+      scene.add(carGroup);
+      objects.push(carGroup);
+    });
+  });
+}
+
+let newCarGroup;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = -Math.PI / 2;
+
+      newCarGroup = new THREE.Group();
+      newCarGroup.add(root);
+
+      newCarGroup.position.set(61, 2.31, 150); // Adjust the x position to the right side of the road
+
+      scene.add(newCarGroup);
+      objects.push(newCarGroup);
+    });
+  });
+}
 	
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -202,7 +237,84 @@ function main() {
 	});
   }
 
+
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+  {
+	const mtlLoader = new MTLLoader();
+	const objLoader = new OBJLoader();
+	mtlLoader.load('lib/plane/part1.mtl', (mtl) => {
+	  mtl.preload();
+	  objLoader.setMaterials(mtl);
+	  objLoader.load('lib/plane/part1.obj', (root) => {//Credit: https://free3d.com/3d-model/noria-952342.html
+		const scaleFactor = 30;
+		root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+		
+		
+		root.position.set(25, 0, 27);
+		root.position.x = -135; 
+		root.position.y = 10; 
+		root.position.z = 135; 
+		root.rotation.y = -Math.PI/4 // 45 degrees in radians
+		scene.add(root);
+	  });
+	});
+  }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+  {
+	const mtlLoader = new MTLLoader();
+	const objLoader = new OBJLoader();
+	mtlLoader.load('lib/heli/Heli_bell.mtl', (mtl) => {
+	  mtl.preload();
+	  objLoader.setMaterials(mtl);
+	  objLoader.load('lib/heli/Heli_bell.obj', (root) => {//Credit: https://free3d.com/3d-model/heli-bell-206-359500.html 
+		const scaleFactor = 4;
+		root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+		
+		
+		root.position.set(25, 0, 27);
+		root.position.x = 133; 
+		root.position.y = 0.31; 
+		root.position.z = 140; 
+		root.rotation.y = Math.PI / 4; // 45 degrees in radians
+
+		scene.add(root);
+	  });
+	});
+  }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+{
+	const mtlLoader = new MTLLoader();
+	const objLoader = new OBJLoader();
+	mtlLoader.load('lib/build/10068_empire_state_building_v1_L3.mtl', (mtl) => {
+	  mtl.preload();
+	  objLoader.setMaterials(mtl);
+	  objLoader.load('lib/build/10068_empire_state_building_v1_L3.obj', (root) => {//Credit: https://free3d.com/3d-model/empire-state-building-v2--490585.html 
+		const scaleFactor = 0.004;
+		root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+		
+					root.rotation.x = -Math.PI / 2; 
+
+		root.position.set(25, 0, 27);
+		root.position.x = -120; 
+		root.position.y = 0.31; 
+		root.position.z = -120; 
+		
+		root.rotation.x = -Math.PI / 2; 
+
+
+		scene.add(root);
+	  });
+	});
+  }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
     {
 		const boxWidth = 1;
 		const boxHeight = 1;
@@ -309,43 +421,158 @@ function main() {
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-		const trunkRadius = 0.5;
-		const trunkHeight = 15;
-		const trunkGeometry = new THREE.CylinderGeometry(trunkRadius, trunkRadius, trunkHeight);
-		const trunkColor = 0x8B4513; 
-	  
-		const leafRadius = 5;
-		const leafGeometry = new THREE.SphereGeometry(leafRadius, 5, 5);
-		const leafColor = 0x228B22; 
-	  
-		const pyramidRadiusT = 3;
-		const pyramidHeightT = 15;
-		const pyramidGeometryT = new THREE.ConeGeometry(pyramidRadiusT, pyramidHeightT, 4);
-	  
-		function createTree1(x, y, z) {
-		  const trunk = makeInstance(trunkGeometry, x, y+trunkHeight/2, z, 1, 1, 1, 0, 0, 0, null, trunkColor);
-		  const pyramid = makeInstance(pyramidGeometryT, x, y + trunkHeight, z, 1, 1, 1, 0, 0, 0, null, leafColor);
-		  objects.push(pyramid);
-		}
-		function createTree(x, y, z) {
-			const trunk1 = makeInstance(trunkGeometry, x, y+trunkHeight/2, z, 1, 1, 1, 0, 0, 0, null, trunkColor);
-			const leaves = makeInstance(leafGeometry, x, y + trunkHeight, z, 1, 1, 1, 0, 0, 0, null, leafColor);
-			objects.push(leaves);
-		  }
-	  
-		createTree1(83, 0.11, 20);
-		createTree(83, 0.11, -20);
-		createTree1(83, 0.11, -32);
-		createTree(83, 0.11, 32);
-		createTree(83, 0.11, 6);
-		createTree1(83, 0.11, -6);
+const trunkRadius = 0.5;
+const trunkHeight = 15;
+const trunkGeometry = new THREE.CylinderGeometry(trunkRadius, trunkRadius, trunkHeight);
+const trunkColor = 0x8B4513;
 
-		createTree1(-83, 0.11, 20);
-		createTree(-83, 0.11, -20);
-		createTree1(-83, 0.11, -32);
-		createTree(-83, 0.11, 32);
-		createTree(-83, 0.11, 6);
-		createTree1(-83, 0.11, -6);
+const leafRadius = 5;
+const leafGeometry = new THREE.SphereGeometry(leafRadius, 5, 5);
+const leafColor = 0x228B22;
+
+const pyramidRadiusT = 3;
+const pyramidHeightT = 15;
+const pyramidGeometryT = new THREE.ConeGeometry(pyramidRadiusT, pyramidHeightT, 4);
+
+// Variables for the big pyramid tree
+const bigTrunkRadius = 2;
+const bigTrunkHeight = 60;
+const bigTrunkGeometry = new THREE.CylinderGeometry(bigTrunkRadius, bigTrunkRadius, bigTrunkHeight);
+
+const bigPyramidRadiusT = 12;
+const bigPyramidHeightT = 60;
+const bigPyramidGeometryT = new THREE.ConeGeometry(bigPyramidRadiusT, bigPyramidHeightT, 4);
+
+function createTree1(x, y, z) {
+  const trunk = makeInstance(trunkGeometry, x, y + trunkHeight / 2, z, 1, 1, 1, 0, 0, 0, null, trunkColor);
+  const pyramid = makeInstance(pyramidGeometryT, x, y + trunkHeight, z, 1, 1, 1, 0, 0, 0, null, leafColor);
+  objects.push(pyramid);
+}
+
+function createTree(x, y, z) {
+  const trunk1 = makeInstance(trunkGeometry, x, y + trunkHeight / 2, z, 1, 1, 1, 0, 0, 0, null, trunkColor);
+  const leaves = makeInstance(leafGeometry, x, y + trunkHeight, z, 1, 1, 1, 0, 0, 0, null, leafColor);
+  objects.push(leaves);
+}
+
+// Function for creating the big pyramid tree
+function createBigPyramidTree(x, y, z) {
+  const trunk = makeInstance(bigTrunkGeometry, x, y + bigTrunkHeight / 2, z, 1, 1, 1, 0, 0, 0, null, trunkColor);
+  const pyramid = makeInstance(bigPyramidGeometryT, x, y + bigTrunkHeight, z, 1, 1, 1, 0, 0, 0, null, leafColor);
+  objects.push(pyramid);
+}
+
+createTree1(83, 0.11, 20);
+createTree(83, 0.11, -20);
+createTree1(83, 0.11, -32);
+createTree(83, 0.11, 32);
+createTree(83, 0.11, 6);
+createTree1(83, 0.11, -6);
+
+createTree1(-83, 0.11, 20);
+createTree(-83, 0.11, -20);
+createTree1(-83, 0.11, -32);
+createTree(-83, 0.11, 32);
+createTree(-83, 0.11, 6);
+createTree1(-83, 0.11, -6);
+
+createBigPyramidTree(-103, 0.11, 0); 
+createBigPyramidTree(103, 0.11, 0); 
+
+createTree1(123, 0.11, 20);
+createTree(123, 0.11, -20);
+createTree1(123, 0.11, -32);
+createTree(123, 0.11, 32);
+createTree(123, 0.11, 6);
+createTree1(123, 0.11, -6);
+
+createTree1(-123, 0.11, 20);
+createTree(-123, 0.11, -20);
+createTree1(-123, 0.11, -32);
+createTree(-123, 0.11, 32);
+createTree(-123, 0.11, 6);
+createTree1(-123, 0.11, -6);
+
+createBigPyramidTree(-143, 0.11, 0); 
+createBigPyramidTree(143, 0.11, 0); 
+
+createTree1(163, 0.11, 20);
+createTree(163, 0.11, -20);
+createTree1(163, 0.11, -32);
+createTree(163, 0.11, 32);
+createTree(163, 0.11, 6);
+createTree1(163, 0.11, -6);
+
+createTree1(-163, 0.11, 20);
+createTree(-163, 0.11, -20);
+createTree1(-163, 0.11, -32);
+createTree(-163, 0.11, 32);
+createTree(-163, 0.11, 6);
+createTree1(-163, 0.11, -6);
+
+createBigPyramidTree(0, 0.11, -150); 
+createBigPyramidTree(0, 0.11, -110); 
+
+createTree1(0, 0.11, 100);
+createTree(0, 0.11, 115);
+createTree1(0, 0.11, 130);
+createTree(0, 0.11, 145);
+createTree1(0, 0.11, 160);
+
+createTree1(20, 0.11, 100);
+createTree(20, 0.11, 115);
+createTree1(20, 0.11, 130);
+createTree(20, 0.11, 145);
+createTree1(20, 0.11, 160);
+
+createTree1(-20, 0.11, 100);
+createTree(-20, 0.11, 115);
+createTree1(-20, 0.11, 130);
+createTree(-20, 0.11, 145);
+createTree1(-20, 0.11, 160);
+
+createTree1(20, 0.11, -100);
+createTree(20, 0.11, -115);
+createTree1(20, 0.11, -130);
+createTree(20, 0.11, -145);
+createTree1(20, 0.11, -160);
+
+createTree1(-20, 0.11, -100);
+createTree(-20, 0.11, -115);
+createTree1(-20, 0.11, -130);
+createTree(-20, 0.11, -145);
+createTree1(-20, 0.11, -160);
+
+createTree1(-163, 0.11, -100);
+createTree(-163, 0.11, -115);
+createTree1(-163, 0.11, -130);
+createTree(-163, 0.11, -145);
+createTree(-163, 0.11, -160);
+
+createTree1(163, 0.11, -100);
+createTree(163, 0.11, -115);
+createTree1(163, 0.11, -130);
+createTree(163, 0.11, -145);
+createTree(163, 0.11, -160);
+
+createTree1(-83, 0.11, -100);
+createTree(-83, 0.11, -115);
+createTree1(-83, 0.11, -130);
+createTree(-83, 0.11, -145);
+createTree(-83, 0.11, -160);
+
+createTree1(83, 0.11, -100);
+createTree(83, 0.11, -115);
+createTree1(83, 0.11, -130);
+createTree(83, 0.11, -145);
+createTree(83, 0.11, -160);
+
+createTree1(-83, 0.11, 100);
+createTree(-83, 0.11, 115);
+createTree1(-83, 0.11, 130);
+createTree(-83, 0.11, 145);
+createTree(-83, 0.11, 160);
+
 	}
 
 	
@@ -373,37 +600,69 @@ function main() {
 
 
 
-	function render(time) {
-		if (resizeRendererToDisplaySize(renderer)) {
-			const canvas = renderer.domElement;
-			camera.aspect = canvas.clientWidth / canvas.clientHeight;
-			camera.updateProjectionMatrix();
-		}
-	
-		time *= 0.001;
-		objects.forEach((obj, ndx) => {
-			const speed = 1 + ndx * 0.1;
-			const rot = time * speed;
-			if (obj.geometry instanceof THREE.ConeGeometry) {//Tree pyramids
-				obj.rotation.y = rot;
-			} else if (obj.type === 'Group') { //Car
-				const radius = 60; 
-				const revolutionSpeed = 0.5; 
-				obj.rotation.y = rot * revolutionSpeed;
-				obj.position.set(
+function render(time) {
+	if (resizeRendererToDisplaySize(renderer)) {
+	  const canvas = renderer.domElement;
+	  camera.aspect = canvas.clientWidth / canvas.clientHeight;
+	  camera.updateProjectionMatrix();
+	}
+  
+	time *= 0.001;
+	objects.forEach((obj, ndx) => {
+	  const speed = 1 + ndx * 0.1;
+	  const rot = time * speed;
+	  if (obj.geometry instanceof THREE.ConeGeometry) {
+		obj.rotation.y = rot;
+	  } else if (obj.type === 'Group') {
+		if (obj === carGroup) {
+			if(donutMode) {
+				dCheck=true;
+				const radius = 60;
+		  		const revolutionSpeed = 0.2;
+		  		obj.rotation.y = rot * revolutionSpeed;
+		  		obj.position.set(
 					Math.cos(rot * revolutionSpeed) * radius,
 					obj.position.y,
 					Math.sin(rot * revolutionSpeed) * radius
-				);
-			} else {//Tree circles and shapes in middle
-				obj.rotation.x = rot;
-				obj.rotation.y = rot;
+		  		);
 			}
-		});
-	
-		renderer.render(scene, camera);
-		requestAnimationFrame(render);
-	}
+			else{
+				if(dCheck){
+					obj.position.set(-38, 2.31, 150);
+					obj.rotation.y = Math.PI;
+					dCheck=false;
+				}
+				const speed = 0.9;
+       			const roadLength = 360; 
+        		const initialPosition = 160; 
+
+        		obj.position.z -= speed;
+
+        		if (obj.position.z <= -roadLength / 2) {
+          		obj.position.z = initialPosition;
+			}
+			}
+		  
+		} else if (obj === newCarGroup) {
+			const speed = 0.9;
+       		const roadLength = 360; 
+        	const initialPosition = 160; 
+
+        	obj.position.z -= speed;
+
+        	if (obj.position.z <= -roadLength / 2) {
+          	obj.position.z = initialPosition;
+			}
+		}
+	  } else {
+		obj.rotation.x = rot/2;
+		obj.rotation.y = rot/2;
+	  }
+	});
+  
+	renderer.render(scene, camera);
+	requestAnimationFrame(render);
+  }
 
 	requestAnimationFrame( render );
 
