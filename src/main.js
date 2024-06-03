@@ -182,10 +182,59 @@ let newCarGroup;
       newCarGroup = new THREE.Group();
       newCarGroup.add(root);
 
-      newCarGroup.position.set(61, 2.31, 150); // Adjust the x position to the right side of the road
-
+      newCarGroup.position.set(61, 2.31, 150); 
       scene.add(newCarGroup);
       objects.push(newCarGroup);
+    });
+  });
+}
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+
+let oppositeCar1;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = Math.PI / 2; 
+
+      oppositeCar1 = new THREE.Group();
+      oppositeCar1.add(root);
+
+      oppositeCar1.position.set(-62, 2.31, -150); 
+
+      scene.add(oppositeCar1);
+      objects.push(oppositeCar1);
+    });
+  });
+}
+
+let oppositeCar2;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = Math.PI / 2; 
+
+      oppositeCar2 = new THREE.Group();
+      oppositeCar2.add(root);
+
+      oppositeCar2.position.set(38, 2.31, -150); 
+
+      scene.add(oppositeCar2);
+      objects.push(oppositeCar2);
     });
   });
 }
@@ -246,7 +295,7 @@ let newCarGroup;
 	mtlLoader.load('lib/plane/part1.mtl', (mtl) => {
 	  mtl.preload();
 	  objLoader.setMaterials(mtl);
-	  objLoader.load('lib/plane/part1.obj', (root) => {//Credit: https://free3d.com/3d-model/noria-952342.html
+	  objLoader.load('lib/plane/part1.obj', (root) => {//Credit: https://free3d.com/3d-model/lowpoly-private-jet-plane-16925.html 
 		const scaleFactor = 30;
 		root.scale.set(scaleFactor, scaleFactor, scaleFactor);
 		
@@ -629,7 +678,9 @@ function render(time) {
 			else{
 				if(dCheck){
 					obj.position.set(-38, 2.31, 150);
-					obj.rotation.y = Math.PI;
+					obj.rotation.y = 0; 
+
+
 					dCheck=false;
 				}
 				const speed = 0.9;
@@ -654,6 +705,17 @@ function render(time) {
           	obj.position.z = initialPosition;
 			}
 		}
+		else if (obj === oppositeCar1 || obj === oppositeCar2) {
+			const speed = 0.9;
+			const roadLength = 360;
+			const initialPosition = -150;
+	  
+			obj.position.z += speed; // Move the car in the opposite direction
+	  
+			if (obj.position.z >= roadLength / 2) {
+			  obj.position.z = initialPosition;
+			}
+		  }
 	  } else {
 		obj.rotation.x = rot/2;
 		obj.rotation.y = rot/2;
