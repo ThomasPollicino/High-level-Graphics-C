@@ -238,6 +238,101 @@ let oppositeCar2;
     });
   });
 }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+
+let xCar1;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = Math.PI; // Rotate the car to face the positive x-direction
+
+      xCar1 = new THREE.Group();
+      xCar1.add(root);
+
+      xCar1.position.set(0, 2.31, 72); // Set the initial position
+
+      scene.add(xCar1);
+      objects.push(xCar1);
+    });
+  });
+}
+
+let xCar2;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = Math.PI; // Rotate the car to face the positive x-direction
+
+      xCar2 = new THREE.Group();
+      xCar2.add(root);
+
+      xCar2.position.set(0, 2.31, -48); // Set the initial position
+
+      scene.add(xCar2);
+      objects.push(xCar2);
+    });
+  });
+}
+
+let xCar3;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = 0; // Rotate the car to face the negative x-direction
+
+      xCar3 = new THREE.Group();
+      xCar3.add(root);
+
+      xCar3.position.set(18, 2.31, 48); // Set the initial position
+
+      scene.add(xCar3);
+      objects.push(xCar3);
+    });
+  });
+}
+
+let xCar4;
+{
+  const mtlLoader = new MTLLoader();
+  const objLoader = new OBJLoader();
+  mtlLoader.load('lib/Avent_sport.mtl', (mtl) => {
+    mtl.preload();
+    objLoader.setMaterials(mtl);
+    objLoader.load('lib/Avent_sport.obj', (root) => {
+      const scaleFactor = 5.0;
+      root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+      root.rotation.y = 0; // Rotate the car to face the negative x-direction
+
+      xCar4 = new THREE.Group();
+      xCar4.add(root);
+
+      xCar4.position.set(-18, 2.31, -72); // Set the initial position
+
+      scene.add(xCar4);
+      objects.push(xCar4);
+    });
+  });
+}
 	
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -650,83 +745,91 @@ createTree(-83, 0.11, 160);
 
 
 function render(time) {
-	if (resizeRendererToDisplaySize(renderer)) {
-	  const canvas = renderer.domElement;
-	  camera.aspect = canvas.clientWidth / canvas.clientHeight;
-	  camera.updateProjectionMatrix();
-	}
-  
-	time *= 0.001;
-	objects.forEach((obj, ndx) => {
-	  const speed = 1 + ndx * 0.1;
-	  const rot = time * speed;
-	  if (obj.geometry instanceof THREE.ConeGeometry) {
-		obj.rotation.y = rot;
-	  } else if (obj.type === 'Group') {
-		if (obj === carGroup) {
-			if(donutMode) {
-				dCheck=true;
-				const radius = 60;
-		  		const revolutionSpeed = 0.2;
-		  		obj.rotation.y = rot * revolutionSpeed;
-		  		obj.position.set(
-					Math.cos(rot * revolutionSpeed) * radius,
-					obj.position.y,
-					Math.sin(rot * revolutionSpeed) * radius
-		  		);
-			}
-			else{
-				if(dCheck){
-					obj.position.set(-38, 2.31, 150);
-					obj.rotation.y = 0; 
+    if (resizeRendererToDisplaySize(renderer)) {
+        const canvas = renderer.domElement;
+        camera.aspect = canvas.clientWidth / canvas.clientHeight;
+        camera.updateProjectionMatrix();
+    }
 
+    time *= 0.001;
+    objects.forEach((obj, ndx) => {
+        const speed = 1 + ndx * 0.1;
+        const rot = time * speed;
+        if (obj.geometry instanceof THREE.ConeGeometry) {
+            obj.rotation.y = rot;
+        } else if (obj.type === 'Group') {
+            if (obj === carGroup) {
+                if(donutMode) {
+                    dCheck = true;
+                    const radius = 60;
+                    const revolutionSpeed = 0.2;
+                    obj.rotation.y = rot * revolutionSpeed;
+                    obj.position.set(
+                        Math.cos(rot * revolutionSpeed) * radius,
+                        obj.position.y,
+                        Math.sin(rot * revolutionSpeed) * radius
+                    );
+                } else {
+                    if(dCheck){
+                        obj.position.set(-38, 2.31, 150);
+                        obj.rotation.y = 0; 
+                        dCheck = false;
+                    }
+                    const speed = 1;
+                    const roadLength = 360; 
+                    const initialPosition = 160; 
+                    obj.position.z -= speed;
+                    if (obj.position.z <= -roadLength / 2) {
+                        obj.position.z = initialPosition;
+                    }
+                }
+            } else if (obj === newCarGroup) {
+                const speed = 1;
+                const roadLength = 360; 
+                const initialPosition = 160; 
+                obj.position.z -= speed;
+                if (obj.position.z <= -roadLength / 2) {
+                    obj.position.z = initialPosition;
+                }
+            } else if (obj === oppositeCar1 || obj === oppositeCar2) {
+                const speed = 1;
+                const roadLength = 360;
+                const initialPosition = -160;
+                obj.position.z += speed; // Move the car in the opposite direction
+                if (obj.position.z >= roadLength / 2) {
+                    obj.position.z = initialPosition;
+                }
+            } else if (obj === xCar1 || obj === xCar2) {
+                const speed = 1;
+                const roadLength = 360;
+				const initialPosition = -160;
 
-					dCheck=false;
-				}
-				const speed = 0.9;
-       			const roadLength = 360; 
-        		const initialPosition = 160; 
+                obj.position.x += speed; // Move the car in the positive x-direction
+                if (obj.position.x >= roadLength / 2) {
+                    obj.position.x = initialPosition;
+                }
+            } else if (obj === xCar3 || obj === xCar4) {
+                const speed = 1;
+                const roadLength = 360;
+				const initialPosition = 160;
 
-        		obj.position.z -= speed;
+                obj.position.x -= speed; // Move the car in the negative x-direction
+                if (obj.position.x <= -roadLength / 2) {
+                    obj.position.x = initialPosition;
+                }
+            } else {
+                obj.rotation.x = rot / 2;
+                obj.rotation.y = rot / 2;
+            }
+        }
+    });
 
-        		if (obj.position.z <= -roadLength / 2) {
-          		obj.position.z = initialPosition;
-			}
-			}
-		  
-		} else if (obj === newCarGroup) {
-			const speed = 0.9;
-       		const roadLength = 360; 
-        	const initialPosition = 160; 
+    renderer.render(scene, camera);
+    requestAnimationFrame(render);
+}
 
-        	obj.position.z -= speed;
+requestAnimationFrame(render);
 
-        	if (obj.position.z <= -roadLength / 2) {
-          	obj.position.z = initialPosition;
-			}
-		}
-		else if (obj === oppositeCar1 || obj === oppositeCar2) {
-			const speed = 0.9;
-			const roadLength = 360;
-			const initialPosition = -150;
-	  
-			obj.position.z += speed; // Move the car in the opposite direction
-	  
-			if (obj.position.z >= roadLength / 2) {
-			  obj.position.z = initialPosition;
-			}
-		  }
-	  } else {
-		obj.rotation.x = rot/2;
-		obj.rotation.y = rot/2;
-	  }
-	});
-  
-	renderer.render(scene, camera);
-	requestAnimationFrame(render);
-  }
-
-	requestAnimationFrame( render );
 
 }
 
