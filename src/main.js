@@ -181,6 +181,28 @@ function main() {
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
+{
+	const mtlLoader = new MTLLoader();
+	const objLoader = new OBJLoader();
+	mtlLoader.load('lib/liberty/LibertStatue.mtl', (mtl) => {
+	  mtl.preload();
+	  objLoader.setMaterials(mtl);
+	  objLoader.load('lib/liberty/LibertStatue.obj', (root) => {//Credit: https://free3d.com/3d-model/statue-of-liberty-73656.html 
+		const scaleFactor = 100;
+		root.scale.set(scaleFactor, scaleFactor, scaleFactor);
+		
+		
+		root.position.set(25, 0, 27);
+		root.position.x = 125; 
+		root.position.y = 0.31; 
+		root.position.z = -120; 
+		
+		scene.add(root);
+	  });
+	});
+  }
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     {
 		const boxWidth = 1;
 		const boxHeight = 1;
