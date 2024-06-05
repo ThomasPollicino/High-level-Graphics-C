@@ -253,12 +253,12 @@ let xCar1;
     objLoader.load('lib/Avent_sport.obj', (root) => {
       const scaleFactor = 5.0;
       root.scale.set(scaleFactor, scaleFactor, scaleFactor);
-      root.rotation.y = Math.PI; // Rotate the car to face the positive x-direction
+      root.rotation.y = Math.PI; 
 
       xCar1 = new THREE.Group();
       xCar1.add(root);
 
-      xCar1.position.set(0, 2.31, 72); // Set the initial position
+      xCar1.position.set(0, 2.31, 72); 
 
       scene.add(xCar1);
       objects.push(xCar1);
@@ -276,12 +276,12 @@ let xCar2;
     objLoader.load('lib/Avent_sport.obj', (root) => {
       const scaleFactor = 5.0;
       root.scale.set(scaleFactor, scaleFactor, scaleFactor);
-      root.rotation.y = Math.PI; // Rotate the car to face the positive x-direction
+      root.rotation.y = Math.PI; 
 
       xCar2 = new THREE.Group();
       xCar2.add(root);
 
-      xCar2.position.set(0, 2.31, -48); // Set the initial position
+      xCar2.position.set(0, 2.31, -48); 
 
       scene.add(xCar2);
       objects.push(xCar2);
@@ -299,12 +299,12 @@ let xCar3;
     objLoader.load('lib/Avent_sport.obj', (root) => {
       const scaleFactor = 5.0;
       root.scale.set(scaleFactor, scaleFactor, scaleFactor);
-      root.rotation.y = 0; // Rotate the car to face the negative x-direction
+      root.rotation.y = 0; 
 
       xCar3 = new THREE.Group();
       xCar3.add(root);
 
-      xCar3.position.set(18, 2.31, 48); // Set the initial position
+      xCar3.position.set(18, 2.31, 48); 
 
       scene.add(xCar3);
       objects.push(xCar3);
@@ -322,12 +322,12 @@ let xCar4;
     objLoader.load('lib/Avent_sport.obj', (root) => {
       const scaleFactor = 5.0;
       root.scale.set(scaleFactor, scaleFactor, scaleFactor);
-      root.rotation.y = 0; // Rotate the car to face the negative x-direction
+      root.rotation.y = 0; 
 
       xCar4 = new THREE.Group();
       xCar4.add(root);
 
-      xCar4.position.set(-18, 2.31, -72); // Set the initial position
+      xCar4.position.set(-18, 2.31, -72);
 
       scene.add(xCar4);
       objects.push(xCar4);
@@ -400,7 +400,7 @@ let xCar4;
 		root.position.x = -135; 
 		root.position.y = 10; 
 		root.position.z = 135; 
-		root.rotation.y = -Math.PI/4 // 45 degrees in radians
+		root.rotation.y = -Math.PI/4 
 		scene.add(root);
 	  });
 	});
@@ -424,7 +424,7 @@ let xCar4;
 		root.position.x = 133; 
 		root.position.y = 0.31; 
 		root.position.z = 140; 
-		root.rotation.y = Math.PI / 4; // 45 degrees in radians
+		root.rotation.y = Math.PI / 4; 
 
 		scene.add(root);
 	  });
@@ -594,7 +594,6 @@ const pyramidRadiusT = 3;
 const pyramidHeightT = 15;
 const pyramidGeometryT = new THREE.ConeGeometry(pyramidRadiusT, pyramidHeightT, 4);
 
-// Variables for the big pyramid tree
 const bigTrunkRadius = 2;
 const bigTrunkHeight = 60;
 const bigTrunkGeometry = new THREE.CylinderGeometry(bigTrunkRadius, bigTrunkRadius, bigTrunkHeight);
@@ -615,7 +614,6 @@ function createTree(x, y, z) {
   objects.push(leaves);
 }
 
-// Function for creating the big pyramid tree
 function createBigPyramidTree(x, y, z) {
   const trunk = makeInstance(bigTrunkGeometry, x, y + bigTrunkHeight / 2, z, 1, 1, 1, 0, 0, 0, null, trunkColor);
   const pyramid = makeInstance(bigPyramidGeometryT, x, y + bigTrunkHeight, z, 1, 1, 1, 0, 0, 0, null, leafColor);
@@ -826,7 +824,7 @@ function render(time) {
 					const speed = 1;
                 	const roadLength = 360;
                 	const initialPosition = -160;
-                	obj.position.z += speed; // Move the car in the opposite direction
+                	obj.position.z += speed; 
                 	if (obj.position.z >= roadLength / 2) {
                     	obj.position.z = initialPosition;
                 	}
@@ -841,7 +839,7 @@ function render(time) {
 					const roadLength = 360;
 					const initialPosition = -160;
 	
-					obj.position.x += speed; // Move the car in the positive x-direction
+					obj.position.x += speed; 
 					if (obj.position.x >= roadLength / 2) {
 						obj.position.x = initialPosition;
 					}
@@ -857,7 +855,7 @@ function render(time) {
                 	const roadLength = 360;
 					const initialPosition = 160;
 
-                	obj.position.x -= speed; // Move the car in the negative x-direction
+                	obj.position.x -= speed;
                 	if (obj.position.x <= -roadLength / 2) {
                     	obj.position.x = initialPosition;
                 	}
