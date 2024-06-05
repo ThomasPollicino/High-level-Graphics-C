@@ -459,7 +459,7 @@ let xCar4;
   }
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-
+//middle shapes
     {
 		const boxWidth = 1;
 		const boxHeight = 1;
@@ -502,7 +502,7 @@ let xCar4;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------		  
 
 
-
+//roads
 		const roadWidth = 35;
 		const roadHeight = 0.15;
 		const roadDepth = 360;
@@ -568,7 +568,7 @@ let xCar4;
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
 
-	
+	//grass
 		const greenSquareWidth = 360;
 		const greenSquareHeight = 0.2;
 		const greenSquareDepth = 360;
@@ -580,7 +580,7 @@ let xCar4;
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-
+//trees
 const trunkRadius = 0.5;
 const trunkHeight = 15;
 const trunkGeometry = new THREE.CylinderGeometry(trunkRadius, trunkRadius, trunkHeight);
@@ -764,7 +764,7 @@ function render(time) {
         camera.aspect = canvas.clientWidth / canvas.clientHeight;
         camera.updateProjectionMatrix();
     }
-
+//animations
     time *= 0.001;
     objects.forEach((obj, ndx) => {
         const speed = 1 + ndx * 0.1;
